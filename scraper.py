@@ -2,9 +2,7 @@ import requests
 import pandas as pd
 
 def fetch_tech_jobs(keyword):
-    """
-    سحب الوظائف والفرص المتاحة عبر API مفتوح ومضمون للوظائف
-    """
+    
     url = f"https://remotive.com/api/remote-jobs?search={keyword}"
     
     headers = {
@@ -24,7 +22,7 @@ def fetch_tech_jobs(keyword):
         
         jobs_list = []
 
-        for job in jobs[:20]:  # جلب أول 20 نتيجة
+        for job in jobs[:20]: 
             jobs_list.append({
                 "Job Title": job.get("title"),
                 "Company": job.get("company_name"),
@@ -50,7 +48,6 @@ def main():
         print(f"[+] Found {len(jobs)} jobs!\n")
         df = pd.DataFrame(jobs)
         
-        # حفظ النتائج في ملف CSV
         csv_filename = f"{keyword.lower().replace(' ', '_')}_jobs.csv"
         df.to_csv(csv_filename, index=False, encoding="utf-8-sig")
         
